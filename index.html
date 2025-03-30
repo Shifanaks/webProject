@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Price Prediction</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="navbar">
+                <a href="/" class="logo">Price Predictor</a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+                </div>
+            </div>
+            <h1 class="title">Product Price Prediction</h1>
+            <form id="predictionForm">
+                <div class="form-group">
+                    <label for="orderNumber">Order Number:</label>
+                    <div class="input-container">
+                        <i class="icon fas fa-hashtag"></i>
+                        <input type="number" id="orderNumber" name="Order Number" placeholder="Enter order number">
+                    </div>
+                </div>
+
+                <div id="loadingOrderDetails" style="display: none; text-align: center;">
+                    <p>Fetching order details...</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orderSubtotal">Order Subtotal Amount:</label>
+                    <div class="input-container">
+                        <i class="icon fas fa-indian-rupee-sign"></i>
+                        <input type="number" id="orderSubtotal" name="Order Subtotal Amount" step="0.01" placeholder="Enter order subtotal">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orderTaxAmount">Order Total Tax Amount:</label>
+                    <div class="input-container">
+                        <i class="icon fas fa-receipt"></i>
+                        <input type="number" id="orderTaxAmount" name="Order Total Tax Amount" step="0.01" placeholder="Enter total tax amount">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="itemCost">Item Cost:</label>
+                    <div class="input-container">
+                        <i class="icon fas fa-tag"></i>
+                        <input type="number" id="itemCost" name="Item Cost" step="0.01" placeholder="Enter item cost">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="shippingMethod">Shipping Method:</label>
+                    <div class="select-container">
+                        <i class="icon fas fa-shipping-fast"></i>
+                        <select id="shippingMethod" name="Shipping Method Title">
+                            <option value="Shipping">Shipping</option>
+                            <option value="Flat Rate">Flat Rate</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method:</label>
+                    <div class="select-container">
+                        <i class="icon fas fa-credit-card"></i>
+                        <select id="paymentMethod" name="Payment Method Title">
+                            <option value="Cash on Delivery">Cash on Delivery</option>
+                            <option value="Paytm Payment Gateway">Paytm Payment Gateway</option>
+                            <option value="No Cost EMI/G Pay/Credit Card/Debit Card/NetBanking">No Cost EMI/G Pay/Credit Card/Debit Card/NetBanking</option> 
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cartDiscount">Cart Discount Amount:</label>
+                    <div class="input-container">
+                        <i class="icon fas fa-percent"></i>
+                        <input type="number" id="cartDiscount" name="Cart Discount Amount" step="0.01" placeholder="Enter discount amount">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stateCode">State Code:</label>
+                    <div class="input-icon">
+                        <i class="icon fas fa-map-marker-alt"></i>
+                        <input type="text" id="stateCode" name="State Code (Billing)" placeholder="Enter state code (e.g., TN, KL)">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-predict">
+                    <i class="fas fa-calculator"></i> Predict Price
+                </button>
+            </form>
+            
+            <div id="result" class="result">
+                <div class="result-header">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Prediction Result</h3>
+                </div>
+                <p>The predicted price is: <span class="price">₹<span id="predictedPrice">0.00</span></span></p>
+            </div>
+            
+            <div id="error" class="error">
+                <div class="error-header">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Error</h3>
+                </div>
+                <p id="errorMessage"></p>
+            </div>
+
+            <div class="spinner-container" id="loadingSpinner">
+                <div class="spinner"></div>
+                <p>Processing...</p>
+            </div>
+        </div>
+    </div>
+
+        
+
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+</html>  
